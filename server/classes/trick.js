@@ -5,10 +5,16 @@ class Trick {
         this.cards = [];
         this.leadSuit = null;
         this.leadPlayerIndex = null;
+        this.cardsInTrick = 0;
+        this.trickSize = 4;
     }
 
     isEmpty() {
         return (this.cards.length == 0);
+    }
+
+    isTrickFull() {
+        return this.cardsInTrick === this.trickSize;
     }
 
     addCard(index, card) {
@@ -21,12 +27,14 @@ class Trick {
 
         // add card to trick
         this.cards[index] = card;
+        this.cardsInTrick++;
     }
 
+    // returns the index of the player who won the trick
     determineTrickWinner() {
         let winner = this.leadPlayerIndex;
 
-        for (let i = 0; i < this.cards.length; i++) {
+        for (let i = 0; i < this.trickSize; i++) {
             if (winner === i) {
                 // this is the current winner, continue loop
                 continue;
@@ -41,7 +49,21 @@ class Trick {
         return winner;
     }
 
-    getCards() {
+    getLeadSuit() {
+        return this.leadSuit;
+    }
+
+    getCardByPlayerIndex(index) {
+        if (typeof this.cards[index] !== 'undefined') {
+            return this.cards[index];
+        }
+        else {
+            return null;
+        }
+
+    }
+
+    getAllCardsInTrick() {
         return this.cards;
     }
 }

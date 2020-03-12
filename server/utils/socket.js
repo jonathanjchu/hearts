@@ -19,8 +19,8 @@ module.exports = function (server) {
     const heartsIO = io.of('/hearts');
     heartsIO.on('connection', (socket) => {
         let id = parseID(socket.id);
-
         
+
     });
 }
 
